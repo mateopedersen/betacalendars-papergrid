@@ -1,0 +1,56 @@
+[package]
+name = "betacalendars-papergrid"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "Deterministic printable calendar sheet layouts with SVG and JSON output."
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/mateopedersen/betacalendars-papergrid"
+documentation = "https://docs.rs/betacalendars-papergrid"
+keywords = ["calendar", "print", "svg", "layout", "planner"]
+categories = ["command-line-utilities", "graphics", "date-and-time"]
+
+[features]
+default = ["svg"]
+svg = []
+serde = ["dep:serde", "dep:serde_json"]
+cli = ["dep:clap", "serde", "svg"]
+
+[dependencies]
+clap = { version = "4.5", features = ["derive"], optional = true }
+serde = { version = "1", features = ["derive"], optional = true }
+serde_json = { version = "1", optional = true }
+
+[[bin]]
+name = "papergrid"
+path = "src/bin/papergrid.rs"
+required-features = ["cli"]
+
+[[example]]
+name = "november_2026"
+required-features = ["svg"]
+
+[[example]]
+name = "december_2026"
+required-features = ["svg"]
+
+[[example]]
+name = "january_2027"
+required-features = ["svg"]
+
+[[example]]
+name = "february_2027"
+required-features = ["svg"]
+
+[[example]]
+name = "blank_a4"
+required-features = ["svg"]
+
+[[example]]
+name = "winter_batch"
+required-features = ["svg"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
